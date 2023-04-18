@@ -1,0 +1,97 @@
+import java.text.DecimalFormat;
+
+/**
+ * public class ElonsToyCar {
+ * public static ElonsToyCar buy() {
+ * throw new UnsupportedOperationException("Please implement the (static) RemoteControlCar.buy()  method");
+ * }
+ * <p>
+ * public String distanceDisplay() {
+ * throw new UnsupportedOperationException("Please implement the (static) RemoteControlCar.distanceDisplay()  method");
+ * }
+ * <p>
+ * public String batteryDisplay() {
+ * throw new UnsupportedOperationException("Please implement the (static) RemoteControlCar.batteryDisplay()  method");
+ * }
+ * <p>
+ * public void drive() {
+ * throw new UnsupportedOperationException("Please implement the (static) RemoteControlCar.drive()  method");
+ * }
+ * }
+ */
+
+
+public class MyToyCar {
+
+    String name;
+
+    int distance;
+
+    int baterryLevel;
+
+
+    public MyToyCar(String name) {
+        this.name = name;
+        distance = 0;
+        baterryLevel = 100;
+
+
+    }
+
+
+    public static MyToyCar buy(String name) {
+//            throw new UnsupportedOperationException("Please implement the (static) RemoteControlCar.buy()  method");
+        return new MyToyCar(name);
+
+
+    }
+
+    public String distanceDisplay() {
+
+        return String.format("%s driven %d meters", this.name, distance);
+
+        //throw new UnsupportedOperationException("Please implement the (static) RemoteControlCar.distanceDisplay()  method");
+
+    }
+
+    public String batteryDisplay() {
+        String result = "";
+        DecimalFormat decimalFormat = new DecimalFormat("#%");
+        String nameMessage = String.format("%s battery at ", this.name);
+        String batteryEmpty = "Battery empty";
+
+        if (baterryLevel == 0) {
+            result = batteryEmpty;
+        } else {
+            result = nameMessage + decimalFormat.format((double) baterryLevel / 100);
+        }
+
+        return result;
+    }
+
+    public void drive() {
+        if (baterryLevel != 0) {
+            distance += 20;
+            baterryLevel--;
+        }
+    }
+
+
+    public static void main(String[] args) {
+        MyToyCar a = new MyToyCar("Audi");
+        MyToyCar b = MyToyCar.buy("BMW");
+        System.out.println(a.distanceDisplay());
+        System.out.println(b.batteryDisplay());
+
+        for (int i = 0; i < 99; i++) {
+            a.drive();
+        }
+        System.out.println(a.distanceDisplay());
+        System.out.println(a.batteryDisplay());
+        a.drive();
+        System.out.println(a.distanceDisplay());
+        System.out.println(a.batteryDisplay());
+
+
+    }
+}
